@@ -8,7 +8,7 @@ class Form extends Component {
 
     state = this.initialState;
 
-    handleChange = event => {
+    handleChange = event => { //When called this changes the name/job strings above
         const { name, value } = event.target
 
         this.setState({
@@ -18,7 +18,7 @@ class Form extends Component {
     }
 
     submitForm = () => {
-        this.props.handleSubmit(this.state)
+        this.props.handleSubmit(this.state) //Calls handleSubmit in App
         this.setState(this.initialState)
     }
 
@@ -33,7 +33,7 @@ class Form extends Component {
                     name="name"
                     id="name"
                     value={name}
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange} /> //anytime a change is made, call this .handleChange
                 <label htmlFor="job">Job</label>
                 <input
                     type="text"
@@ -44,7 +44,7 @@ class Form extends Component {
                 <input
                     type = "button"
                     value = "Submit"
-                    onClick={this.submitForm} />
+                    onClick={this.submitForm} /> //Calls submit form
             </form>
         )
     }
