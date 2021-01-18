@@ -24,7 +24,6 @@ class Form extends Component {
 
     render() {
         const { name, job } = this.state;
-
         return (
             <form>
                 <label htmlFor="name">Name</label>
@@ -33,7 +32,7 @@ class Form extends Component {
                     name="name"
                     id="name"
                     value={name}
-                    onChange={this.handleChange} /> //anytime a change is made, call this .handleChange
+                    onChange={this.handleChange} />
                 <label htmlFor="job">Job</label>
                 <input
                     type="text"
@@ -44,7 +43,7 @@ class Form extends Component {
                 <input
                     type = "button"
                     value = "Submit"
-                    onClick={this.submitForm} /> //Calls submit form
+                    onClick={this.submitForm} />
             </form>
         )
     }
