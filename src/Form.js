@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class Form extends Component {
     initialState = {
-        name: " ",
-        job: " ",
+        name: "",
+        job: "",
     }
 
     state = this.initialState;
@@ -12,7 +12,6 @@ class Form extends Component {
         const { name, value } = event.target
 
         this.setState({
-            //why is there no job added here? Why was there a comma in the provided code?
             [name]: value,
         })
     }

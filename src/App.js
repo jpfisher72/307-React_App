@@ -4,43 +4,9 @@ import Form from './Form'
 import axios from 'axios'
 
 class App extends Component {
-    // render() {
-    //   const characters = [
-    //       {name: 'Charlie', job: 'Janitor'},
-    //       {name: 'Mac', job: 'Bouncer'},
-    //       {name: 'Dee', job: 'Aspiring Actress'},
-    //       {name: 'Dennis', job: 'Bartender'}
-    //   ]
     state = {
       characters: [
-        //These were deleted as information is now coming from the form
-        // {name: 'Charlie', job: 'Janitor'},
-        // {name: 'Mac', job: 'Bouncer'},
-        // {name: 'Dee', job: 'Aspiring Actress'},
-        // {name: 'Dennis', job: 'Bartender'}
       ]
-    }
-
-    removeCharacter = index => {
-      const { characters } = this.state
-
-      this.setState({
-        characters: characters.filter((character, i) => {
-          return i !== index
-        })
-      })
-    }
-
-    /* handleSubmit = character => {
-      this.setState({ characters: [...this.state.characters, character]})
-    } OLD */
-
-    handleSubmit = character => {
-      this.makePostCall(character).then( callResult => {
-        if (callResult === true) {
-          this.setState({ characters: [...this.state.characters, character] });
-        }
-      });
     }
 
     componentDidMount() {
@@ -55,16 +21,54 @@ class App extends Component {
         });
     }
 
+    removeCharacter = index => {
+      const { characters } = this.state
+      this.makeDeleteCall(characters[index]).then(response => {
+        if (response === true) {
+          this.setState({
+            characters: characters.filter((character, i) => {
+              return i !== index;
+              }),
+            })
+          }
+        });
+      }
+
+    handleSubmit = character => {
+      this.makePostCall(character).then(callResult => {
+        //QUESTION: why does if(callResult) work to update state but if(callResult === true) doesn't?
+        if (callResult) {
+          this.setState({ characters: [...this.state.characters, callResult] });
+        }
+      });
+    }
+
     makePostCall(character){
       return axios.post('http://localhost:5000/users', character)
-        .then(function (response) {
-          console.log(response);
-          return (response.status === 200);
+        .then(res => {
+          if (res.status === 201) {
+            return res.data;
+          }
+          return false;
         })
         .catch(function (error) {
-           console.log(error);
+          console.log(error);
           return false;
         });
+    }
+
+    makeDeleteCall(character){
+      return axios.delete('http://localhost:5000/users/' + character.id)
+        .then(res => {
+          if (res.status === 204) {
+            return true;
+          }
+          return false;
+        })
+        .catch(function (error) {
+          console.log(error);
+          return false;
+        }); 
     }
       
     render() {
@@ -77,12 +81,6 @@ class App extends Component {
         </div>
       )
     }
-
-      // return (
-      //   <div className="container">
-      //     <Table characterData={characters} />
-      //   </div>
-      // )
   }
 
 export default App
