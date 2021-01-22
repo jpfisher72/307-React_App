@@ -3,21 +3,8 @@ import Table from './Table'
 import Form from './Form'
 
 class App extends Component {
-    // render() {
-    //   const characters = [
-    //       {name: 'Charlie', job: 'Janitor'},
-    //       {name: 'Mac', job: 'Bouncer'},
-    //       {name: 'Dee', job: 'Aspiring Actress'},
-    //       {name: 'Dennis', job: 'Bartender'}
-    //   ]
     state = {
-      characters: [
-        //These were deleted as information is now coming from the form
-        // {name: 'Charlie', job: 'Janitor'},
-        // {name: 'Mac', job: 'Bouncer'},
-        // {name: 'Dee', job: 'Aspiring Actress'},
-        // {name: 'Dennis', job: 'Bartender'}
-      ]
+      characters: []
     }
 
     removeCharacter = index => {
@@ -44,12 +31,6 @@ class App extends Component {
         </div>
       )
     }
-
-      // return (
-      //   <div className="container">
-      //     <Table characterData={characters} />
-      //   </div>
-      // )
   }
 
 export default App
