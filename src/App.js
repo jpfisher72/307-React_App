@@ -64,7 +64,7 @@ class App extends Component {
   }
 
   makeDeleteCall(character){
-    return axios.delete('http://localhost:5000/users/' + character.id) //Extract ID from character passed
+    return axios.delete('http://localhost:5000/users/' + character._id) //Extract ID from character passed
       .then(res => {
         if (res.status === 204) { //If code recieved is a 204 (good delete), return ture
           return true;
